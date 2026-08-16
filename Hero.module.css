@@ -1,0 +1,180 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 48px 100px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(242,165,90,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -150px; left: -150px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(124,158,255,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Big counter like Jishnu's */
+.counter {
+  position: fixed;
+  top: 50%; right: 60px;
+  transform: translateY(-50%);
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(140px, 22vw, 260px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.content { max-width: 950px; position: relative; z-index: 1; }
+
+.sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f2a65a;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(64px, 10vw, 130px);
+  line-height: 1.0;
+  color: #fff;
+  margin-bottom: 36px;
+}
+
+.lineWrap {
+  display: block;
+  overflow: hidden;
+}
+
+.line { display: block; }
+.italic { font-style: italic; color: rgba(255,255,255,0.45); }
+
+.char {
+  display: inline-block;
+  transform-origin: bottom center;
+}
+
+.desc {
+  font-size: 19px;
+  color: rgba(232,234,240,0.5);
+  max-width: 540px;
+  line-height: 1.75;
+  margin-bottom: 48px;
+  font-weight: 300;
+}
+
+.cta { display: flex; gap: 18px; flex-wrap: wrap; }
+
+.btnPrimary {
+  background: #f2a65a;
+  color: #0c0d11;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 18px 36px;
+  border-radius: 50px;
+  transition: background 0.2s, transform 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.btnPrimary:hover { background: #f7b878; transform: translateY(-3px); }
+
+.btnGhost {
+  border: 1.5px solid rgba(232,234,240,0.2);
+  color: #e8eaf0;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 18px 36px;
+  border-radius: 50px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.btnGhost:hover { border-color: rgba(232,234,240,0.55); transform: translateY(-3px); }
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 130px; left: 48px;
+  display: flex; align-items: center; gap: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(232,234,240,0.35);
+  text-transform: uppercase;
+}
+
+.scrollLine {
+  width: 40px; height: 1px;
+  background: rgba(232,234,240,0.15);
+  position: relative; overflow: hidden;
+}
+.scrollLine::after {
+  content: "";
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: #f2a65a;
+  animation: slide 2s ease infinite;
+}
+@keyframes slide { 0%{left:-100%} 50%{left:0} 100%{left:100%} }
+
+/* Marquee at bottom of hero */
+.marqueeWrap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 16px 0;
+}
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: rgba(255,255,255,0.07);
+  letter-spacing: 0.04em;
+}
+.marqueeItem { display: flex; align-items: center; white-space: nowrap; padding: 0 10px; }
+.dot { color: #f2a65a; opacity: 0.4; margin: 0 12px; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* BIG HORIZONTAL NAME — Jishnu's signature element */
+.bigNameWrap {
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 20px 0;
+  background: rgba(255,255,255,0.01);
+}
+.bigName {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(100px, 20vw, 240px);
+  font-weight: 400;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.12);
+  white-space: nowrap;
+  line-height: 1;
+  padding: 0 60px;
+  will-change: transform;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 100px 24px 120px; }
+  .counter { display: none; }
+  .scrollIndicator { left: 24px; bottom: 120px; }
+  .bigName { font-size: 80px; }
+}

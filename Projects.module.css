@@ -1,0 +1,90 @@
+.section {
+  padding: 140px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+.header { margin-bottom: 70px; }
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #f2a65a;
+  margin-bottom: 16px;
+}
+.title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(40px, 5.5vw, 68px);
+  color: #fff;
+  line-height: 1.05;
+}
+.list { display: flex; flex-direction: column; }
+.item {
+  display: grid;
+  grid-template-columns: 80px 1fr 48px;
+  gap: 40px;
+  padding: 52px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  position: relative;
+  transition: background 0.3s, padding-left 0.35s ease;
+  text-decoration: none;
+  cursor: none;
+}
+.item:hover { padding-left: 12px; }
+.item:hover .arrow { opacity: 1; transform: translate(0, 0); }
+.item:hover .name { color: #f2a65a; }
+.num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: rgba(232,234,240,0.2);
+  padding-top: 6px;
+}
+.body { display: flex; flex-direction: column; gap: 16px; }
+.meta { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+.name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(22px, 3vw, 36px);
+  color: #fff;
+  line-height: 1.15;
+  transition: color 0.3s;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #f2a65a;
+  border: 1px solid rgba(242,165,90,0.3);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+.desc {
+  font-size: 15px;
+  color: rgba(232,234,240,0.45);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 680px;
+}
+.link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: rgba(232,234,240,0.3);
+  transition: color 0.2s;
+  align-self: flex-start;
+}
+.item:hover .link { color: #f2a65a; }
+.arrow {
+  font-size: 28px;
+  color: #f2a65a;
+  opacity: 0;
+  transform: translate(-8px, 8px);
+  transition: opacity 0.3s, transform 0.3s;
+  align-self: center;
+  font-family: serif;
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 24px; }
+  .item { grid-template-columns: 1fr; gap: 12px; }
+  .num { display: none; }
+  .arrow { display: none; }
+}

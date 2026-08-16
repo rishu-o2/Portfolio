@@ -1,0 +1,24 @@
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 0;
+}
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.inner span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: rgba(232,234,240,0.28);
+}
+.back {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: rgba(232,234,240,0.28);
+  transition: color 0.2s;
+  letter-spacing: 0.04em;
+}
+.back:hover { color: #f2a65a; }
