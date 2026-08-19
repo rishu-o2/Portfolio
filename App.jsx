@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import Preloader from './Preloader'
 import Cursor from './Cursor'
 import Nav from './Nav'
 import Hero from './Hero'
@@ -9,19 +11,27 @@ import Footer from './Footer'
 import Grain from './Grain'
 
 export default function App() {
+  const [loading, setLoading] = useState(true)
+
   return (
     <>
-      <Grain />
-      <Cursor />
-      <Nav />
-      <main>
-        <Hero />
-        <Philosophy />
-        <Projects />
-        <Experience />
-        <Contact />
-      </main>
-      <Footer />
+      {loading && <Preloader onComplete={() => setLoading(false)} />}
+
+      {!loading && (
+        <>
+          <Grain />
+          <Cursor />
+          <Nav />
+          <main>
+            <Hero />
+            <Philosophy />
+            <Projects />
+            <Experience />
+            <Contact />
+          </main>
+          <Footer />
+        </>
+      )}
     </>
   )
 }
