@@ -33,7 +33,9 @@ const PROJECTS = [
 ]
 
 function ProjectItem({ project }) {
-  const ref = useRef(null)
+  const ref     = useRef(null)
+  const textRef = useRef(null)
+
   useEffect(() => {
     gsap.fromTo(ref.current,
       { opacity: 0, y: 50 },
@@ -41,12 +43,37 @@ function ProjectItem({ project }) {
         scrollTrigger: { trigger: ref.current, start: 'top 90%' }
       }
     )
+
+    const row = ref.current
+    function onEnter() {
+      gsap.to(textRef.current, {
+        y: -4,
+        duration: 0.35,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      })
+    }
+    function onLeave() {
+      gsap.to(textRef.current, {
+        y: 0,
+        duration: 0.6,
+        ease: 'elastic.out(1, 0.5)',
+        overwrite: 'auto',
+      })
+    }
+
+    row.addEventListener('mouseenter', onEnter)
+    row.addEventListener('mouseleave', onLeave)
+    return () => {
+      row.removeEventListener('mouseenter', onEnter)
+      row.removeEventListener('mouseleave', onLeave)
+    }
   }, [])
 
   return (
     <a ref={ref} href={project.link} target="_blank" rel="noopener" className={styles.item}>
       <div className={styles.num}>{project.num}</div>
-      <div className={styles.body}>
+      <div ref={textRef} className={styles.body}>
         <div className={styles.meta}>
           <h3 className={styles.name}>{project.name}</h3>
           <div className={styles.tags}>

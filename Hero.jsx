@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import styles from './Hero.module.css'
+import useMagnetic from './useMagnetic'
+import ThreeBackground from './ThreeBackground'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,6 +26,10 @@ export default function Hero() {
   const scrollRef   = useRef(null)
   const marqueeRef  = useRef(null)
   const bigNameRef  = useRef(null)
+
+  // Magnetic effect on CTA buttons
+  const exploreRef  = useMagnetic(0.4)
+  const talkRef     = useMagnetic(0.4)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -71,6 +77,7 @@ export default function Hero() {
   return (
     <>
       <section className={styles.hero} id="top">
+        <ThreeBackground />
         <div ref={counterRef} className={styles.counter}>0</div>
 
         <div className={styles.content}>
@@ -94,8 +101,8 @@ export default function Hero() {
           </p>
 
           <div ref={ctaRef} className={styles.cta}>
-            <a href="#projects" className={styles.btnPrimary}>Explore Work →</a>
-            <a href="#contact"  className={styles.btnGhost}>Let's Talk →</a>
+            <a ref={exploreRef} href="#projects" className={styles.btnPrimary}>Explore Work →</a>
+            <a ref={talkRef}    href="#contact"  className={styles.btnGhost}>Let's Talk →</a>
           </div>
         </div>
 
