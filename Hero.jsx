@@ -17,6 +17,7 @@ function splitToSpans(text) {
 
 export default function Hero() {
   const counterRef  = useRef(null)
+  const badgeRef    = useRef(null)
   const subRef      = useRef(null)
   const line1Ref    = useRef(null)
   const line2Ref    = useRef(null)
@@ -48,10 +49,11 @@ export default function Hero() {
       const chars3 = line3Ref.current.querySelectorAll(`.${styles.char}`)
 
       gsap.set([...chars1, ...chars2, ...chars3], { y: 120, opacity: 0, rotateX: -90 })
-      gsap.set([subRef.current, descRef.current, ctaRef.current, scrollRef.current], { opacity: 0, y: 20 })
+      gsap.set([badgeRef.current, subRef.current, descRef.current, ctaRef.current, scrollRef.current], { opacity: 0, y: 20 })
 
       const tl = gsap.timeline({ delay: 0.5 })
-      tl.to(subRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' })
+      tl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+        .to(subRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.2')
         .to(chars1, { y: 0, opacity: 1, rotateX: 0, duration: 0.9, ease: 'power4.out', stagger: 0.03 }, '-=0.2')
         .to(chars2, { y: 0, opacity: 1, rotateX: 0, duration: 0.9, ease: 'power4.out', stagger: 0.03 }, '-=0.7')
         .to(chars3, { y: 0, opacity: 1, rotateX: 0, duration: 0.9, ease: 'power4.out', stagger: 0.03 }, '-=0.7')
@@ -81,6 +83,7 @@ export default function Hero() {
         <div ref={counterRef} className={styles.counter}>0</div>
 
         <div className={styles.content}>
+          <div ref={badgeRef} className={styles.badge}>⚡ Currently building IRA v2</div>
           <p ref={subRef} className={styles.sub}>AI/ML Engineer &amp; Software Developer</p>
 
           <h1 className={styles.title}>
@@ -103,6 +106,7 @@ export default function Hero() {
           <div ref={ctaRef} className={styles.cta}>
             <a ref={exploreRef} href="#projects" className={styles.btnPrimary}>Explore Work →</a>
             <a ref={talkRef}    href="#contact"  className={styles.btnGhost}>Let's Talk →</a>
+            <a href="/resume.pdf" download className={styles.btnCV}>Download CV ↓</a>
           </div>
         </div>
 

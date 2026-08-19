@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import Preloader from './Preloader'
+import ScrollProgress from './ScrollProgress'
 import Cursor from './Cursor'
 import Nav from './Nav'
 import Hero from './Hero'
+import AboutSection from './AboutSection'
+import SkillsSection from './SkillsSection'
 import Philosophy from './Philosophy'
 import Projects from './Projects'
 import Experience from './Experience'
@@ -15,6 +18,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollProgress />
       {loading && <Preloader onComplete={() => setLoading(false)} />}
 
       {!loading && (
@@ -24,6 +28,8 @@ export default function App() {
           <Nav />
           <main>
             <Hero />
+            <AboutSection />
+            <SkillsSection />
             <Philosophy />
             <Projects />
             <Experience />

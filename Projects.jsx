@@ -30,6 +30,22 @@ const PROJECTS = [
     link: 'https://github.com/rishu-o2/PSO-credit-card-ML-project',
     linkLabel: 'View on GitHub',
   },
+  {
+    num: '04',
+    name: 'IRA-OS — AI Operating Layer',
+    tags: ['Python', 'System Programming', 'AI'],
+    desc: 'An operating system layer powered by AI — handling system-level tasks, file management, and automation through natural language commands.',
+    link: 'https://github.com/rishu-o2/IRA-OS',
+    linkLabel: 'View on GitHub',
+  },
+  {
+    num: '05',
+    name: 'OS Security Framework',
+    tags: ['Security', 'Python', 'Linux'],
+    desc: 'A security-focused framework for monitoring and hardening operating system vulnerabilities, built for practical cybersecurity learning.',
+    link: 'https://github.com/rishu-o2/OS-Security-Framework',
+    linkLabel: 'View on GitHub',
+  },
 ]
 
 function ProjectItem({ project }) {

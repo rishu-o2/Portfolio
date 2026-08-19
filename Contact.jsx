@@ -8,7 +8,11 @@ gsap.registerPlugin(ScrollTrigger)
 export default function Contact() {
   const leftRef  = useRef(null)
   const rightRef = useRef(null)
-  const [sent, setSent] = useState(false)
+
+  const [name,    setName]    = useState('')
+  const [email,   setEmail]   = useState('')
+  const [message, setMessage] = useState('')
+  const [status,  setStatus]  = useState('idle') // 'idle' | 'sending' | 'success' | 'error'
 
   useEffect(() => {
     ;[leftRef, rightRef].forEach((r, i) => {
@@ -21,10 +25,25 @@ export default function Contact() {
     })
   }, [])
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSent(true)
-    setTimeout(() => { setSent(false); e.target.reset() }, 3000)
+    setStatus('sending')
+    try {
+      const res = await fetch('https://formspree.io/f/xdkzdryg', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ name, email, message }),
+      })
+      if (res.ok) {
+        setStatus('success')
+        setName(''); setEmail(''); setMessage('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
+    setTimeout(() => setStatus('idle'), 4000)
   }
 
   return (
@@ -58,22 +77,41 @@ export default function Contact() {
               </div>
             </div>
           </div>
+
           <div ref={rightRef} className={styles.right}>
             <form className={styles.form} onSubmit={handleSubmit}>
               <div className={styles.formGroup}>
                 <label>Name</label>
-                <input type="text" placeholder="Your name" required />
+                <input
+                  type="text" placeholder="Your name" required
+                  value={name} onChange={e => setName(e.target.value)}
+                />
               </div>
               <div className={styles.formGroup}>
                 <label>Email</label>
-                <input type="email" placeholder="your@email.com" required />
+                <input
+                  type="email" placeholder="your@email.com" required
+                  value={email} onChange={e => setEmail(e.target.value)}
+                />
               </div>
               <div className={styles.formGroup}>
                 <label>Message</label>
-                <textarea rows={5} placeholder="Tell me about your project..." required />
+                <textarea
+                  rows={5} placeholder="Tell me about your project..." required
+                  value={message} onChange={e => setMessage(e.target.value)}
+                />
               </div>
-              <button type="submit" className={sent ? styles.sent : styles.submit}>
-                {sent ? 'Message Sent ✓' : 'Send Message →'}
+
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className={status === 'success' ? styles.sent : styles.submit}
+                style={status === 'error' ? { borderColor: '#ff6b6b', color: '#ff6b6b' } : {}}
+              >
+                {status === 'sending' && 'Sending…'}
+                {status === 'success' && 'Message Sent ✓'}
+                {status === 'error'   && 'Something went wrong. Try again.'}
+                {status === 'idle'    && 'Send Message →'}
               </button>
             </form>
           </div>
